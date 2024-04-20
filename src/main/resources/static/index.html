@@ -35,6 +35,51 @@
 
 <button type="button" class="btn btn-secondary" onclick="document.getElementById('formCadastroUser').reset();">Novo</button>
 
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalPesquisar">Pesquisar</button>
+
+
+
+<div class="modal fade" id="modalPesquisar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pesquisa de usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nomeBusca" class="col-form-label">Informe seu nome:</label>
+                        <input type="text" class="form-control" id="nomeBusca">
+                    </div>
+
+                    <button type="button" class="btn btn-success" onclick="pesquisaUser()">Buscar</button>
+
+                </form>
+
+                <table class="table" id="tabelaResultados">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript; choose one of the two! -->
@@ -43,26 +88,26 @@
 
 <script type="text/javascript">
 
+
     function salvarUsuario(){
 
         var id = $("#id").val();
         var nome = $("#nome").val();
         var idade = $("#idade").val();
 
-$.ajax({
-    method: "POST",
-    url: "salvar",
-    data: JSON.stringify({id: id, nome : nome, idade : idade}),
-    contentType: "application/json; charset=utf-8",
-    success: function (response) {
-        $("#id").val(response.id);
-        alert("Gravou com sucesso!");
-    },
-    error: function(xhr, status, errorThrown) {
-        alert("Erro ao salvar usuário: " + xhr.responseText);
-    }
-});
-
+        $.ajax({
+            method: "POST",
+            url: "salvar",
+            data: JSON.stringify({id: id, nome : nome, idade : idade}),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $("#id").val(response.id);
+                alert("Gravou com sucesso!");
+            },
+            error: function(xhr, status, errorThrown) {
+                alert("Erro ao salvar usuário:" + xhr.responseText);
+            }
+        });
 
 
     }
